@@ -12,14 +12,14 @@ void showSetings(context) {
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: List.generate(Data.lsLesson.length, (index) {
+              String lesson = Data.lsLesson.keys.toList()[index];
               return CheckboxListTile(
-                title: Text(Data.lsLesson[index]),
+                title: Text(lesson),
                 controlAffinity: ListTileControlAffinity.leading,
-                checkColor: Colors.white,
-                value: false,
+                value: Data.lsLesson[lesson]!["selected"] == true,
                 onChanged: (bool? value) {
                   setState(() {
-                    
+                    Data.lsLesson[lesson]!["selected"] = value!;
                   });
                 },
               );
@@ -27,6 +27,15 @@ void showSetings(context) {
           );
         }
       ),
+      actions: [
+        ElevatedButton(
+          onPressed: () {
+            Data.fillLsAsso();
+            Navigator.of(context).pop();
+          },
+          child: Text('OK'),
+        ),
+      ],
     ),
   );
 }
