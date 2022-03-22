@@ -1,10 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:learn_language/components/show_btn.dart';
-import 'package:learn_language/settings.dart';
+import 'package:learn_language/data.dart';
+import 'package:learn_language/home.dart';
 
 void main() {
   runApp(MyApp());
+  Data.init();
 }
 
 class MyApp extends StatelessWidget {
@@ -27,48 +27,6 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: Home(),
-    );
-  }
-}
-
-class Home extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Learn language"),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () {
-              showSetings(context);
-            },
-            icon: Icon(Icons.settings),
-          ),
-        ],
-      ),
-      body: Center(
-        child: Row(
-          children: [
-            Expanded(child: ShowBtn(),),
-            Expanded(
-              child: Center(
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: Text('Hear'),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          
-        },
-        child: Icon(Icons.skip_next),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
