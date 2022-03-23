@@ -19,7 +19,17 @@ class _HomeState extends State<Home> {
     _showBtn = ElevatedButton(
       onPressed: () {
         setState(() {
-          _response = Text(Data.lsAsso[Data.index][0]);
+          _response = Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(Data.lsAsso[Data.index][0], textScaleFactor: 2,),
+              SizedBox(height: 20,),
+              Text(Data.lsAsso[Data.index][1], textScaleFactor: 2, style: TextStyle(color: Colors.red),),
+              SizedBox(height: 20,),
+              Text(Data.lsAsso[Data.index][2], textScaleFactor: 2, style: TextStyle(color: Colors.blue),),
+            ],
+          );
         });
       },
       child: Text('Show'),
@@ -30,29 +40,29 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text("Learn language"),
-          centerTitle: true,
-          actions: [
-            IconButton(
-              onPressed: () {
-                showSetings(context);
-              },
-              icon: Icon(Icons.settings),
-            ),
-          ],
-        ),
-        body: Center(
-          child: Row(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Learn language"),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {
+              showSetings(context);
+            },
+            icon: Icon(Icons.settings),
+          ),
+        ],
+      ),
+      body: SafeArea(
+        child: Center(
+          child: Column(
             children: [
               Expanded(child: Center(child: _response),),
               Expanded(
                 child: Center(
                   child: IconButton(
                     onPressed: () {
-                      playSound("${Data.lsAsso[Data.index][1]}.mp3");
+                      playSound("${Data.lsAsso[Data.index][3]}.mp3");
                     },
                     icon: Icon(Icons.volume_up),
                   ),
@@ -61,22 +71,22 @@ class _HomeState extends State<Home> {
             ],
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            if (Data.index < Data.lsAsso.length) {
-              Data.index++;
-              setState(() {
-                _response = _showBtn;
-              });
-            }
-            else {
-              showSetings(context);
-            }
-          },
-          child: Icon(Icons.skip_next),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          if (Data.index < Data.lsAsso.length) {
+            Data.index++;
+            setState(() {
+              _response = _showBtn;
+            });
+          }
+          else {
+            showSetings(context);
+          }
+        },
+        child: Icon(Icons.skip_next),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

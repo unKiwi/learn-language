@@ -26,8 +26,6 @@ void showSetings(context) {
               height: MediaQuery.of(context).size.height * 0.4,
               width: 0,
               child: ListView(
-                shrinkWrap: true,
-                // mainAxisSize: MainAxisSize.min,
                 children: List.generate(Data.lsLesson.length, (index) {
                   String lesson = Data.lsLesson.keys.toList()[index];
                   return CheckboxListTile(
