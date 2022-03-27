@@ -39,21 +39,21 @@ class _HomeState extends State<Home> {
 
     _response = _showBtn;
 
-    _textSoundBtn = TextButton(
-      onPressed: () {
-        playSound("${Data.lsAsso[Data.index][0]}.mp3");
-      },
-      child: Text(Data.lsAsso[Data.index][2], textScaleFactor: 2, textAlign: TextAlign.center, style: TextStyle(color: Colors.blue),),
-    );
     _iconSoundBtn = IconButton(
       onPressed: () {
         playSound("${Data.lsAsso[Data.index][0]}.mp3");
         setState(() {
-          _soundBtn = _textSoundBtn;
+          _soundBtn = TextButton(
+            onPressed: () {
+              playSound("${Data.lsAsso[Data.index][0]}.mp3");
+            },
+            child: Text(Data.lsAsso[Data.index][2], textScaleFactor: 2, textAlign: TextAlign.center, style: TextStyle(color: Colors.blue),),
+          );
         });
       },
       icon: Icon(Icons.volume_up),
     );
+    
     _soundBtn = _iconSoundBtn;
   }
 
