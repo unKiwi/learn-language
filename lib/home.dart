@@ -12,6 +12,10 @@ class _HomeState extends State<Home> {
   late Widget _response;
   late Widget _showBtn;
 
+  late Widget _soundBtn;
+  late Widget _iconSoundBtn;
+  late Widget _textSoundBtn;
+
   @override
   void initState() {
     super.initState();
@@ -23,11 +27,9 @@ class _HomeState extends State<Home> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(Data.lsAsso[Data.index][0], textScaleFactor: 2,),
+              Text(Data.lsAsso[Data.index][3], textScaleFactor: 2, textAlign: TextAlign.center,),
               SizedBox(height: 20,),
-              Text(Data.lsAsso[Data.index][1], textScaleFactor: 2, style: TextStyle(color: Colors.red),),
-              SizedBox(height: 20,),
-              Text(Data.lsAsso[Data.index][2], textScaleFactor: 2, style: TextStyle(color: Colors.blue),),
+              Text(Data.lsAsso[Data.index][1], textScaleFactor: 2, textAlign: TextAlign.center, style: TextStyle(color: Colors.red),),
             ],
           );
         });
@@ -36,6 +38,23 @@ class _HomeState extends State<Home> {
     );
 
     _response = _showBtn;
+
+    _textSoundBtn = TextButton(
+      onPressed: () {
+        playSound("${Data.lsAsso[Data.index][0]}.mp3");
+      },
+      child: Text(Data.lsAsso[Data.index][2], textScaleFactor: 2, textAlign: TextAlign.center, style: TextStyle(color: Colors.blue),),
+    );
+    _iconSoundBtn = IconButton(
+      onPressed: () {
+        playSound("${Data.lsAsso[Data.index][0]}.mp3");
+        setState(() {
+          _soundBtn = _textSoundBtn;
+        });
+      },
+      icon: Icon(Icons.volume_up),
+    );
+    _soundBtn = _iconSoundBtn;
   }
 
   @override
@@ -60,12 +79,7 @@ class _HomeState extends State<Home> {
               Expanded(child: Center(child: _response),),
               Expanded(
                 child: Center(
-                  child: IconButton(
-                    onPressed: () {
-                      playSound("${Data.lsAsso[Data.index][3]}.mp3");
-                    },
-                    icon: Icon(Icons.volume_up),
-                  ),
+                  child: _soundBtn
                 ),
               ),
             ],
@@ -78,6 +92,7 @@ class _HomeState extends State<Home> {
             Data.index++;
             setState(() {
               _response = _showBtn;
+              _soundBtn = _iconSoundBtn;
             });
           }
           else {
