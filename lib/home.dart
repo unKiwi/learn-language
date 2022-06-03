@@ -87,10 +87,13 @@ class _HomeState extends State<Home> {
                   },
                 ),
                 onFocusChange: (hasFocus) {
-                  setState(() {
-                    showKeyboard = true;
-                    update();
-                  });
+                  if (hasFocus) {
+                    FocusScope.of(context).requestFocus(FocusNode());
+                    setState(() {
+                      showKeyboard = true;
+                      update();
+                    });
+                  }
                 },
               ),
             ),
