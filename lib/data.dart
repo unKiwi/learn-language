@@ -22,12 +22,11 @@ class Data {
     }
     int maxValue = list.reduce(max);
     for (int i = 0; i < list.length; i++) {
-      list[i] = maxValue - list[i];
+      list[i] = maxValue - list[i] + 1;
     }
 
     // select lucky index
     int sum = list.reduce((value, element) => value + element);
-    if (sum < 1) return 0;
     int nba = Random().nextInt(sum);
     int luckyIndex = 0;
     int sumIndexPassed = 0;
@@ -64,12 +63,10 @@ class Data {
 
     indexWordView = getProba(lsProbaWord);
     List<int> lsProbaMode = [];
-    int nbModeKnowlege = 0;
     for (String mode in lsMode) {
       int modeKnowlege = lsWord[indexWordView][mode] as int;
-      nbModeKnowlege += modeKnowlege;
+      lsProbaMode.add(modeKnowlege);
     }
-    lsProbaMode.add(nbModeKnowlege);
     modeView = lsMode[getProba(lsProbaMode)];
   }
 
@@ -95,5 +92,7 @@ class Data {
       lsWord = jsonDecode(savedLsWord);
     }
     getQuestion();
+
+    print(getProba([0, 0, 0]));
   }
 }
