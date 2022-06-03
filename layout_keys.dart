@@ -41,19 +41,6 @@
 // const List<List> _defaultEnglishLayout = [
 //   // Row 1
 //   const [
-//     '1',
-//     '2',
-//     '3',
-//     '4',
-//     '5',
-//     '6',
-//     '7',
-//     '8',
-//     '9',
-//     '0',
-//   ],
-//   // Row 2
-//   const [
 //     'q',
 //     'w',
 //     'e',
@@ -66,7 +53,7 @@
 //     'p',
 //     VirtualKeyboardKeyAction.Backspace
 //   ],
-//   // Row 3
+//   // Row 2
 //   const [
 //     'a',
 //     's',
@@ -81,7 +68,7 @@
 //     '\'',
 //     VirtualKeyboardKeyAction.Return
 //   ],
-//   // Row 4
+//   // Row 3
 //   const [
 //     VirtualKeyboardKeyAction.Shift,
 //     'z',
@@ -96,13 +83,11 @@
 //     '/',
 //     VirtualKeyboardKeyAction.Shift
 //   ],
-//   // Row 5
+//   // Row 4
 //   const [
 //     VirtualKeyboardKeyAction.SwithLanguage,
-//     '@',
 //     VirtualKeyboardKeyAction.Space,
-//     '&',
-//     '_',
+//     '.',
 //   ]
 // ];
 
@@ -138,10 +123,10 @@
 //     'д',
 //     'ж',
 //     'э',
-//     VirtualKeyboardKeyAction.Return
 //   ],
 //   // Row 3
 //   const [
+//     VirtualKeyboardKeyAction.Shift,
 //     'я',
 //     'ч',
 //     'с',
@@ -156,10 +141,7 @@
 //   // Row 4
 //   const [
 //     VirtualKeyboardKeyAction.SwithLanguage,
-//     '@',
 //     VirtualKeyboardKeyAction.Space,
-//     '-',
 //     '.',
-//     '_',
 //   ]
 // ];

@@ -46,56 +46,59 @@ class _HomeState extends State<Home> {
     }
 
     // define _response
-    if (Data.modeView == "readEn_speakRu") {
-      _response = const Center(
-        child: Text("In voice"),
-      );
-    }
-    else if (trueResponseIsShow) {
+    if (trueResponseIsShow) {
       _response = Center(
         child: Text(textEdit.text),
       );
     }
     else {
+      Widget _responseArea;
+      if (Data.modeView == "readEn_speakRu") {
+        _responseArea = const Text("In voice");
+      }
+      else {
+        _responseArea = Focus(
+          child: TextField(
+            controller: textEdit,
+            onSubmitted: (String value) async {
+              await showDialog<void>(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: const Text('Thanks!'),
+                    content: Text(
+                        'You typed "$value", which has length ${value.characters.length}.'),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text('OK'),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+          ),
+          onFocusChange: (hasFocus) {
+            if (hasFocus) {
+              FocusScope.of(context).requestFocus(FocusNode());
+              setState(() {
+                showKeyboard = true;
+                update();
+              });
+            }
+          },
+        );
+      }
+
       _response = Row(
         children: [
           AspectRatio(
             aspectRatio: 7 / 5,
             child: Center(
-              child: Focus(
-                child: TextField(
-                  controller: textEdit,
-                  onSubmitted: (String value) async {
-                    await showDialog<void>(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: const Text('Thanks!'),
-                          content: Text(
-                              'You typed "$value", which has length ${value.characters.length}.'),
-                          actions: <Widget>[
-                            TextButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: const Text('OK'),
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  },
-                ),
-                onFocusChange: (hasFocus) {
-                  if (hasFocus) {
-                    FocusScope.of(context).requestFocus(FocusNode());
-                    setState(() {
-                      showKeyboard = true;
-                      update();
-                    });
-                  }
-                },
-              ),
+              child: _responseArea,
             ),
           ),
           AspectRatio(

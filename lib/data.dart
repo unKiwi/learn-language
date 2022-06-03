@@ -92,7 +92,5 @@ class Data {
       lsWord = jsonDecode(savedLsWord);
     }
     getQuestion();
-
-    print(getProba([0, 0, 0]));
   }
 }
