@@ -12,7 +12,7 @@ class Data {
   static late int indexWordView;
   static List<String> lsMode = ["readRu_writeEn", "readEn_writeRu", "hearRu_writeEn", "readEn_speakRu"];
   static int nbMinWord = 20;
-  static int minWordKnowlege = 5;
+  static int minWordKnowlege = 1;
 
   static int getProba(List<int> list) {
     // reverse list
@@ -52,9 +52,10 @@ class Data {
         nbWordKnowlege += wordKnowlege;
         if (wordKnowlege < minWordKnowlege && i >= nbMinWord) isBreaked = true;
       }
-      if (isBreaked) break;
-
       lsProbaWord.add(nbWordKnowlege);
+
+      if (isBreaked) break;
+      
       i++;
     }
 
