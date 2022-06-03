@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   audioplayers: ^0.20.1
   shared_preferences: ^2.0.13
+  virtual_keyboard_multi_language: ^0.2.4
 
 dev_dependencies:
   flutter_test:
@@ -62,6 +63,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/audio/
+    - assets/image/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
