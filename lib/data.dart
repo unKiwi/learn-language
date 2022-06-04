@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:learn_language/config.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
@@ -60,7 +61,7 @@ class Data {
     }
 
     // update level
-    level = lsProbaWord.length - nbMinWord + 1;
+    level = lsProbaWord.length - nbMinWord;
 
     indexWordView = getProba(lsProbaWord);
     List<int> lsProbaMode = [];
@@ -86,12 +87,21 @@ class Data {
   }
   
   static void init() async {
-    // select words
     prefs = await SharedPreferences.getInstance();
-    String? savedLsWord = prefs.getString("lsWord");
-    if (savedLsWord != null) {
-      lsWord = jsonDecode(savedLsWord);
+
+    // get version
+    String? version = prefs.getString("version");
+    if (version != Config.version) {
+      prefs.setString("version", Config.version);
     }
+    else {
+      // select words
+      String? savedLsWord = prefs.getString("lsWord");
+      if (savedLsWord != null) {
+        lsWord = jsonDecode(savedLsWord);
+      }
+    }
+    
     getQuestion();
   }
 }
