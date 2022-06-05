@@ -60,26 +60,10 @@ class _HomeState extends State<Home> {
         _responseArea = Focus(
           child: TextField(
             controller: textEdit,
-            onSubmitted: (String value) async {
-              await showDialog<void>(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: const Text('Thanks!'),
-                    content: Text(
-                        'You typed "$value", which has length ${value.characters.length}.'),
-                    actions: <Widget>[
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: const Text('OK'),
-                      ),
-                    ],
-                  );
-                },
-              );
-            },
+            textAlign: TextAlign.center,
+            decoration: InputDecoration(
+              hintText: Data.modeView == "readEn_writeRu" ? 'In Russian' : 'In English',
+            ),
           ),
           onFocusChange: (hasFocus) {
             if (hasFocus) {
@@ -126,7 +110,7 @@ class _HomeState extends State<Home> {
         children.add(Expanded(
           child: Center(
             child: IconButton(
-              color: Colors.blue,
+              color: Data.modeView == "readEn_speakRu" ? Colors.blue : Colors.black,
               icon: const Icon(Icons.volume_up),
               tooltip: 'Hear',
               onPressed: () {
@@ -138,20 +122,20 @@ class _HomeState extends State<Home> {
       }
       children.add(Expanded(
         child: Center(
-          child: Text(Data.getCurrentWord()["phonetique"], style: const TextStyle(color: Colors.blue)),
+          child: Text(Data.getCurrentWord()["phonetique"]),
         ),
       ));
       if (Data.modeView != "readRu_writeEn") {
         children.add(Expanded(
           child: Center(
-            child: Text(Data.getCurrentWord()["lang"], style: const TextStyle(color: Colors.red),),
+            child: Text(Data.getCurrentWord()["lang"], style: TextStyle(color: Data.modeView == "readEn_writeRu" ? Colors.blue : Colors.black),),
           ),
         ));
       }
       if (Data.modeView != "readEn_writeRu" && Data.modeView != "readEn_speakRu") {
         children.add(Expanded(
           child: Center(
-            child: Text(Data.getCurrentWord()["en"]),
+            child: Text(Data.getCurrentWord()["en"], style: TextStyle(color: Data.modeView == "hearRu_writeEn" || Data.modeView == "readRu_writeEn" ? Colors.blue : Colors.black),),
           ),
         ));
       }
